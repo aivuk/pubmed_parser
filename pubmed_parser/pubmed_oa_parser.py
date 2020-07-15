@@ -178,6 +178,16 @@ def parse_pubmed_xml(path, include_path=False, nxml=False):
     else:
         subjects = ""
 
+    keywords_node = tree.findall(".//kwd-group/kwd")
+    keywords = list()
+    if keywords_node is not None:
+        for k in keywords_node:
+            keyword = " ".join([k_.strip() for k_ in k.itertext()]).strip()
+            keywords.append(keyword)
+        keywords = "; ".join(keywords)
+    else:
+        keywords = ""
+
     # create affiliation dictionary
     affil_id = tree.xpath(".//aff[@id]/@id")
     if len(affil_id) > 0:
@@ -228,6 +238,7 @@ def parse_pubmed_xml(path, include_path=False, nxml=False):
         "publication_year": pub_year,
         "publication_date": "{}-{}-{}".format(pub_day, pub_month, pub_year),
         "subjects": subjects,
+        "keywords": keywords,
         "coi_statement": coi_statement,
     }
     if include_path:
