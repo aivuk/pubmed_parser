@@ -91,6 +91,7 @@ def parse_coi_statements(tree):
         './/*[@*="conflict"]',
         './/*[@*="conflict-interest"]',
         './/*[@*="COI-statement"]',
+        './/*[contains(translate(text(), "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"interest") and (contains(translate(text(), "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"competing") or contains(translate(text(), "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"declaring") or contains(translate(text(), "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"conflict"))]'
     )
 
     for path in coi_paths:
